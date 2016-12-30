@@ -57,8 +57,6 @@ describe('Reducers', () => {
 
       var res = reducers.todosReducer(df(todos), df(action));
 
-      console.log(res);
-
       expect(res[0].completed).toBe(false);
       expect(res[0].compledtedAt).toBe(undefined);
 
