@@ -3,22 +3,21 @@ var ReactDOM = require('react-dom');
 var {Provider} = require('react-redux');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 var TodoApp = require('TodoApp');
-
+var TodoAPI = require('TodoAPI');
 var actions = require('actions');
 var store = require('configureStore').configure();
 
-console.log(store);
-
 store.subscribe(() => {
-  console.log('New state ', store.getState());
+  var state = store.getState();
+
+  console.log('New state', state);
+
+  TodoAPI.setTodos(state.todos);
 });
 
-store.dispatch(actions.addTodo('Cleans the yard'));
+var initialTodos = TodoAPI.getTodos();
+store.dispatch(actions.addTodos(initialTodos));
 
-store.dispatch(actions.setSearchText('year'));
-
-store.dispatch(actions.toggleShowCompleted());
-// Load foundation
 //require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
